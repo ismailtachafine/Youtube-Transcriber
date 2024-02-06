@@ -42,11 +42,13 @@ if youtube_link:
 
 if st.button("Get Detailed Notes"):
     transcript_text=extract_transcript_details(youtube_link)
+    with st.spinner("Please wait. This may take a while depending on the video duration."):
+        if transcript_text:
+            summary=generate_gemini_content(transcript_text,prompt)
+            st.markdown("## Detailed Notes:")
+            st.write(summary)
+    st.success("Transcription completed successfully!")
 
-    if transcript_text:
-        summary=generate_gemini_content(transcript_text,prompt)
-        st.markdown("## Detailed Notes:")
-        st.write(summary)
 
 
 
